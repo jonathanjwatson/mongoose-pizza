@@ -1,6 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
+const Pizza = require("./models/pizzaModel");
+const PizzaController = require("./controllers/pizzaController");
 
 const PORT = process.env.PORT || 8080;
 
@@ -20,6 +22,14 @@ connection.on("connected", () => {
 connection.on("error", (err) => {
   console.log("Mongoose connection error: ", err);
 });
+
+app.get("/api/config", (req, res) => {
+  res.json({
+    success: true,
+  });
+});
+
+app.use(PizzaController);
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
