@@ -1,10 +1,10 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
-const Pizza = require("./models/pizzaModel");
 const PizzaController = require("./controllers/pizzaController");
+const IngredientController = require("./controllers/ingredientController");
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3001;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -30,6 +30,13 @@ app.get("/api/config", (req, res) => {
 });
 
 app.use(PizzaController);
+app.use(IngredientController);
+
+app.use(express.static(__dirname + "/client/build/"));
+
+app.get("*", (req, res) => {
+  res.sendFile(__dirname + "/client/build/index.html");
+});
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);

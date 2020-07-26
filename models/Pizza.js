@@ -16,6 +16,12 @@ const PizzaSchema = new Schema({
   size: {
     type: Number,
   },
+  ingredients: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Ingredient",
+    },
+  ],
 });
 
 const Pizza = mongoose.model("Pizza", PizzaSchema);
