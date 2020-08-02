@@ -37,20 +37,24 @@ router.post("/api/pizzas", (req, res) => {
     !req.body.price ||
     !req.body.price.trim().length
   ) {
-    return res.status(400).json({
-      error: true,
-      data: null,
-      message: "Please enter valid information.",
-    });
+    return setTimeout(() => {
+      res.status(400).json({
+        error: true,
+        data: null,
+        message: "Please enter valid information.",
+      });
+    }, 3000);
   }
 
   db.Pizza.create(req.body)
     .then((createdPizza) => {
-      res.json({
-        error: false,
-        data: createdPizza,
-        message: "Successfully created new pizza.",
-      });
+      setTimeout(() => {
+        res.json({
+          error: false,
+          data: createdPizza,
+          message: "Successfully created new pizza.",
+        });
+      }, 3000);
     })
     .catch((err) => {
       console.log(err);
@@ -66,7 +70,7 @@ router.put("/api/pizzas/:id", (req, res) => {
   const ingredientIdToAdd = req.body.ingredientIdToAdd;
   db.Pizza.findOneAndUpdate(
     { _id: req.params.id },
-    { $push: { ingredients: arrayOfIngredients } },
+    { $push: { ingredients: ingredientIdToAdd } },
     { new: true }
   )
     .then((updatedPizza) => {

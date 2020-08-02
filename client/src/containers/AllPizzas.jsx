@@ -3,8 +3,6 @@ import axios from "axios";
 
 import Pizza from "../components/AllPizzas/Pizza";
 import Ingredient from "../components/AllPizzas/Ingredient";
-import NewIngredient from "../components/AllPizzas/NewIngredient";
-import NewPizza from "../components/AllPizzas/NewPizza";
 
 class AllPizzas extends Component {
   state = {
@@ -56,16 +54,6 @@ class AllPizzas extends Component {
                 </div>
               ))}
             </div>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col s12">
-            <NewPizza getPizzas={this.getPizzas} />
-          </div>
-        </div>
-        <div className="row">
-          <div className="col s12">
-            <NewIngredient />
           </div>
         </div>
       </div>
